@@ -124,6 +124,58 @@ body {
     padding: 1.5rem 2rem;
 }
 
+.products {
+    max-width: 120rem;
+    width: 90%;
+    margin: 5rem auto;
+}
+
+.products__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.products__title {
+    font-size: 3.2rem;
+}
+
+.products__text {
+    display: flex;
+    align-items: center;
+    color: var(--principal);
+    font-weight: bold;
+    padding: 2rem;
+}
+
+.products__icon {
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+.products__box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    column-gap: 1rem;
+}
+
+.products__image {
+    width: 100%;
+}
+
+.products__name {
+    font-weight: normal;
+    font-size: 1.6rem;
+}
+
+.products__price {
+    font-weight: bold;
+}
+
+.products__option {
+    color: var(--principal);
+    font-weight: bold;
+}
 
 @media (max-width: 480px) {
 
