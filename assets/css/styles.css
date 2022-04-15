@@ -194,7 +194,6 @@ body {
     padding: 5rem 0;
 }
 
-
 .contact__list {
     padding: 0;
 
@@ -282,6 +281,12 @@ body {
         display: none;
     }
 
+    .contact {
+        height: 50rem;
+        flex-direction: column;
+        justify-content: center;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -315,6 +320,19 @@ body {
 
     .products__box {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact {
+        height: auto;
+        align-items: center;
+    }
+
+    .contact__list {
+        text-align: center;
+    }
+
+    .contact__form {
+        width: 100%;
     }
 
 }
