@@ -304,11 +304,6 @@ body {
         transition: all .5s ease-in-out;
     }
 
-    .btn {
-        padding: .8rem 3rem;
-        font-size: 1.4rem;
-    }
-
     .nav__toggle-btn {
         display: flex;
         cursor: pointer;
