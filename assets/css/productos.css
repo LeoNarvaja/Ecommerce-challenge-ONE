@@ -1,0 +1,30 @@
+.content__selproduct {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    column-gap: 1.6rem;
+}
+
+.content__img {
+    width: 100%;
+}
+
+.selproduct__img {
+    width: 100%;
+}
+
+.content__title,
+.content__price,
+.content__desc {
+    margin: 0 0 .8rem;
+}
+
+.content__title {
+    font-size: 4.8rem;
+    font-weight: medium;
+    color: #464646;
+}
+
+.content__price {
+    font-weight: bold;
+}
