@@ -86,31 +86,39 @@ body {
 
 .banner {
     background-image: url(../img/banner-image.png);
-    height: 30rem;
+    height: 35rem;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 3.5rem;
 }
 
 .banner__box {
-    padding: 7rem 8rem;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .banner__content {
     color: var(--fondoSecundario);
 }
 
+.banner__title,
+.banner__text {
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+}
+
 .banner__title {
-    font-size: clamp(2.2rem, 6vw, 4.8rem);
-    margin: 1rem 0;
+    font-size: 5.2rem;
 }
 
 .banner__text {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-}
-
-.banner__btn {
-    margin-top: 3rem;
+    font-size: 2.2rem
 }
 
 .btn-banner {
@@ -164,6 +172,8 @@ body {
 
 .products__image {
     width: 100%;
+    height: 17.5rem;
+    object-fit: cover;
 }
 
 .products__name {
@@ -277,6 +287,11 @@ body {
 
 
 @media (max-width: 768px) {
+
+    .banner__box {
+        width: 95%;
+    }
+
     .products__card:nth-child(4) ~ .products__card:nth-child(n) {
         display: none;
     }
@@ -309,8 +324,13 @@ body {
         cursor: pointer;
     }
 
-    .banner__box {
-        padding: 7rem 2rem;
+    .banner__title {
+        font-size: 2.2rem;
+        margin: 1rem 0;
+    }
+    
+    .banner__text {
+        font-size: 1.4rem
     }
 
     .products__box {
