@@ -7,6 +7,7 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%; /** 1rem --- 10px **/
+    scroll-behavior: smooth;
 }
 
 *, *:before, *:after {
@@ -21,18 +22,20 @@ body {
 /*------ NAVEGACION --------*/
 
 .header {
-    max-width: 120rem;
-    width: 90%;
-    margin: 0 auto;
+    background-color: #ffffff;
 }
 
 .nav-box {
+    position: relative;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2rem;
-    position: relative;
     column-gap: 2rem;
+    max-width: 120rem;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .nav__content {
