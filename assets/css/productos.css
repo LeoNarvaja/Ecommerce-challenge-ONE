@@ -1,0 +1,26 @@
+.products-section {
+    background-color: #F5F5F5;
+}
+
+@media (max-width: 768px) {
+
+    .products__card:nth-child(4) ~ .products__card:nth-child(n) {
+        display: block;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .products__content {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin-bottom: 1.6rem;
+    }
+
+    .products__title {
+        font-size: 2.2rem;
+    }
+
+}
