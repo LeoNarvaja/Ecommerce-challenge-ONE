@@ -60,6 +60,13 @@ const mensajesErrores = {
     mensaje: {
         valueMissing: "El mensaje no puede estar vacio",
         customError: "El mensaje debe tener menos de 120 caracteres"
+    },
+    usuario: {
+        valueMissing: "El campo de correo no puede estar vacio",
+        patternMismatch: "Respete el formato de correo solicitado"
+    },
+    pass: {
+        valueMissing: "El campo contraseña no puede estar vacio"
     }
 }
 
@@ -83,6 +90,16 @@ const validarMensaje = (input) => {
     let mensaje = "";
     if(input.value.length > 120) {
         mensaje = "No puede exceder los 120 caracteres"
-    } 
+    }
     input.setCustomValidity(mensaje);
 }
+
+/*---------- VALIDACIONES, FORMULARIO LOGIN ----------*/
+
+const loginInputs = document.querySelectorAll(".login__input");
+
+loginInputs.forEach(input => {
+    input.addEventListener("blur", (input) => {
+        validarCampo(input.target);
+    })
+})
