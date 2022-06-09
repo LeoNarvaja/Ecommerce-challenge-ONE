@@ -56,8 +56,14 @@
             <form action="" class="login__form">
 
                 <legend class="login__title">Iniciar sesion</legend>
-                <input type="text" class="login__input" placeholder="Escriba su correo electrónico">
-                <input type="text" class="login__input" placeholder="Escriba su contraseña">
+                <div class="login__camp">
+                    <input type="text" class="login__input" placeholder="Escriba su correo electrónico" pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z\s0-9-]+\.[a-zA-Z\s0-9-.]+/" data-name="usuario" required>
+                    <span class="contact__error"></span>
+                </div>
+                <div class="login__camp">
+                    <input type="password" class="login__input" placeholder="Escriba su contraseña" data-name="pass" required>
+                    <span class="contact__error"></span>
+                </div>
                 <div class="login__btn">
                     <button class="btn login__btn-b">Entrar</button>
                 </div>
