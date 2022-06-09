@@ -25,15 +25,20 @@
                 </div>
 
                 <div id="nav-search" class="nav__search">
-                    <input class="nav__input" type="text" placeholder="¿Qué deseas buscar?">
+                    <input class="nav__input" id="search" type="text" placeholder="¿Qué deseas buscar?">
                     <span class="nav__btn-search">
                         <i class="nav__icon fa-solid fa-magnifying-glass"></i>
                     </span>
                 </div>
+
+                <div class="nav__load">
+                    <img class="nav__load___img" src="assets/img/loading.svg" alt="Cargando...">
+                </div>
+                
             </div>
 
             <div class="nav__btn">
-                <a href="login.html"><button class="btn" type="button">Login</button></a>
+                <a href="login.html"><button class="btn btn-login" type="button">Login</button></a>
             </div>
 
             <div id="toggle-search" class="nav__toggle-btn">
@@ -116,6 +121,8 @@
         </div>
     </footer>
     
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="controllers/search-prod.controller.js"></script>
     <script src="https://kit.fontawesome.com/b545c92e40.js" crossorigin="anonymous"></script>
     <script src="assets/js/script.js"></script>
 </body>
