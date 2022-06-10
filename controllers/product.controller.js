@@ -6,7 +6,7 @@ const createCard = (imagen, nombre, precio, id) => {
     const card = document.createElement("div");
     card.classList.add("products__card");
     const content = `
-        <img class="products__image" src="../assets/img/${imagen}" alt="${imagen}">
+        <img class="products__image" src="assets/img/${imagen}" alt="${imagen}">
         <h3 class="products__name">${nombre}</h3>
         <p class="products__price">${precio}</p>
         <a href="productoXYZ.html" class="products__option">Ver producto</a>`
