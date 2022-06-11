@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/normalize.css">
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/producto__nuevo.css">
+    <link rel="stylesheet" href="../assets/css/normalize.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="../assets/css/producto__nuevo.css">
     <title>Alurageek</title>
 </head>
 <body>
@@ -20,8 +20,8 @@
             <div class="nav__content">
 
                 <div class="nav__logo">
-                    <a href="index.html">
-                        <img class="nav__img" src="assets/img/Logo.svg" alt="logo-alurageek">
+                    <a href="../index.html">
+                        <img class="nav__img" src="../assets/img/Logo.svg" alt="logo-alurageek">
                     </a>
                 </div>
 
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="nav__load">
-                    <img class="nav__load___img" src="assets/img/loading.svg" alt="Cargando...">
+                    <img class="nav__load___img" src="../assets/img/loading.svg" alt="Cargando...">
                 </div>
                 
             </div>
@@ -50,24 +50,56 @@
 
     </header>
 
-    <section class="products-section">
+    <section class="newproduct-section">
+        <div class="newproduct">
+            <form action="" class="newproduct__form" data-form>
 
-        <div class="products">
-        
-            <div class="products__content">
-                <h2 class="products__title"></h2>
-            </div>
+                <legend class="newproduct__title">Agregar nuevo producto</legend>
 
-            <div class="products__box" data-prod></div>
-            
+                <div class="newproduct__field new__product-file">
+                    
+                    <div class="newproduct__img-container">
+                        <img class="newproduct__img" src="../assets/img/Vector.svg" alt="">
+                        <p class="newproduct__text">Arrastre para agregar una imagen para el producto</p>
+                    </div>
+
+                    <p class="newproduct__option">o</p>
+
+                    <div class="newproduct__btn-container">
+                        <button class="btn newproduct__btn"> Busque en su computador</button>
+                    </div>
+
+                </div>
+
+                <div class="newproduct__field">
+
+                    <input type="text" class="newproduct__input" placeholder="Nombre del producto" data-nombre>
+
+                </div>
+                <div class="newproduct__field">
+
+                    <input type="text" class="newproduct__input" placeholder="Precio del producto" data-precio>
+
+                </div>
+                
+                <div class="newproduct__field">
+
+                    <textarea class="newproduct__input new__product-msg" cols="30" rows="10" placeholder="Descripción del producto"></textarea>
+
+                </div>
+                <div class="newproduct__field">
+
+                    <button type="submit" class="btn newproduct__btn-agree">Agregar producto</button>
+
+                </div>
+            </form>
         </div>
-
     </section>
 
     <footer class="footer">
         <div class="contact">
             <div class="contact__logo">
-                <a class="contact__img" href="index.html"><img src="assets/img/Logo.svg" alt="logo-alurageek"></a>
+                <a class="contact__img" href="../index.html"><img src="../assets/img/Logo.svg" alt="logo-alurageek"></a>
             </div>
             <div class="contact__menu">
                 <ul class="contact__list">
@@ -117,12 +149,12 @@
         </div>
     </footer>
 
-
+    <script type="module" src="../controllers/editar-prod.controller.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="controllers/search-prod.controller.js"></script>
-    <script type="module" src="controllers/product.controller.js"></script>
+    <script type="module" src="../controllers/search-prod.controller.js"></script>
     <script src="https://kit.fontawesome.com/b545c92e40.js" crossorigin="anonymous"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
     
