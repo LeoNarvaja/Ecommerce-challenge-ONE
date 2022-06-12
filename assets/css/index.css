@@ -227,8 +227,7 @@ a {
 .products__icons___box {
     display: flex;
     align-items: center;
-    justify-content: center;
-    column-gap: 1rem;
+    column-gap: .8rem;
 }
 
 .footer {

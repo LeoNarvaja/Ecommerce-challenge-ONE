@@ -8,6 +8,7 @@ const detailProducts = async () => {
 
     const name = document.querySelector("[data-nombre]");
     const price = document.querySelector("[data-precio]");
+    const descr = document.querySelector("[data-descr]");
 
     try {
 
@@ -17,6 +18,7 @@ const detailProducts = async () => {
         if(res.ok){
             name.value = resJson.nombre;
             price.value = resJson.precio;
+            descr.value = resJson.descripcion;
         } else {
             throw new Error();
         }

@@ -103,3 +103,51 @@ loginInputs.forEach(input => {
         validarCampo(input.target);
     })
 })
+
+/*---------- VALIDAR REGISTRO ----------*/
+let page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1)
+
+const btn1 = document.querySelector("[data-ind]");
+const btn2 = document.querySelectorAll("[data-all]");
+const btn3 = document.querySelector("[data-log]");
+
+const url = new URL(window.location)
+const user = url.searchParams.get("user")
+
+if(btn1){
+    console.log("existe");
+    btn1.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log("se hizo click")
+        if(user === null) {
+            window.location.href = "/index.html";
+        } else if(user == "admin") {
+            window.location.href = "/index.html?user=admin";
+        }
+    })
+}
+
+if(btn2) {
+    btn2.forEach(el => {
+        el.addEventListener("click", (event) => {
+            event.preventDefault();
+            console.log("se hizo click")
+            if(user === null) {
+                window.location.href = "/screens/productos.html";
+            } else if(user == "admin") {
+                window.location.href = "/screens/productos.html?user=admin";
+            }
+        })
+    })
+}
+
+if(user == "admin") {
+    btn3.textContent = "Salir";
+    btn3.addEventListener("click", () => {
+        window.location.href = "/index.html"
+    })
+} else if (user === null) {
+    btn3.addEventListener("click", () => {
+        window.location.href = "/screens/login.html"
+    })
+}

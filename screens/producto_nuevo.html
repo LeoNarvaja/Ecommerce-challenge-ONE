@@ -20,7 +20,7 @@
             <div class="nav__content">
 
                 <div class="nav__logo">
-                    <a href="../index.html">
+                    <a href ="" data-ind>
                         <img class="nav__img" src="../assets/img/Logo.svg" alt="logo-alurageek">
                     </a>
                 </div>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="nav__btn">
-                <a href="login.html"><button class="btn btn-login" type="button">Login</button></a>
+                <button class="btn btn-login" type="button" data-log>Login</button>
             </div>
 
             <div id="toggle-search" class="nav__toggle-btn">
@@ -84,9 +84,24 @@
                 
                 <div class="newproduct__field">
 
-                    <textarea class="newproduct__input new__product-msg" cols="30" rows="10" placeholder="Descripción del producto"></textarea>
+                    <textarea class="newproduct__input new__product-msg" cols="30" rows="10" placeholder="Descripción del producto" data-descr></textarea>
 
                 </div>
+
+                <div class="newproduct__field">
+
+                    <div>
+                        <input type="radio" id="stw" name="option" value="Star wars" checked data-cat>
+                        <label for="stw">Star wars</label>
+                    </div>
+                  
+                    <div>
+                        <input type="radio" id="cons" name="option" value="Consolas" data-cat>
+                        <label for="cons">Consolas</label>
+                    </div>
+
+                </div>
+
                 <div class="newproduct__field">
 
                     <button type="submit" class="btn newproduct__btn-agree">Agregar producto</button>
