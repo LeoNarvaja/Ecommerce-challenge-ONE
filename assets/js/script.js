@@ -19,6 +19,11 @@ contactInputs.forEach(input => {
 
 /*---------- VALIDACIONES, FORMULARIO DE CONTACTO ----------*/
 
+const inputs = {
+    nombre: false,
+    mensaje: false
+}
+
 contactInputs.forEach(input => {
     input.addEventListener("blur", (input) => {
         if(input.target.value == "") {
@@ -38,11 +43,29 @@ const validarCampo = (input) => {
     if(input.validity.valid) {
         input.parentElement.classList.remove("error");
         input.parentElement.querySelector(".contact__error").innerHTML = "";
+        inputs[input.dataset.name] = true;
     } else {
         input.parentElement.classList.add("error");
         input.parentElement.querySelector(".contact__error").innerHTML = mostrarMensaje(actInput, input);
+        inputs[input.dataset.name] = false;
     }
 }
+
+const form = document.querySelector(".contact__form")
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if(inputs.nombre && inputs.mensaje) {
+        
+    } else {
+        contactInputs.forEach(input => {
+            if(inputs[input.dataset.name] == false) {
+                input.parentElement.classList.add("error");
+                input.parentElement.querySelector(".contact__error").innerHTML = mostrarMensaje(input.dataset.name, input)
+            } 
+        })
+    }
+})
 
 /* ----------- ERRORES ----------- */
 
@@ -107,7 +130,7 @@ loginInputs.forEach(input => {
 /*---------- VALIDAR REGISTRO ----------*/
 let page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1)
 
-const btn1 = document.querySelector("[data-ind]");
+const btn1 = document.querySelectorAll("[data-ind]");
 const btn2 = document.querySelectorAll("[data-all]");
 const btn3 = document.querySelector("[data-log]");
 
@@ -115,15 +138,16 @@ const url = new URL(window.location)
 const user = url.searchParams.get("user")
 
 if(btn1){
-    console.log("existe");
-    btn1.addEventListener("click", (event) => {
-        event.preventDefault();
-        console.log("se hizo click")
-        if(user === null) {
-            window.location.href = "/index.html";
-        } else if(user == "admin") {
-            window.location.href = "/index.html?user=admin";
-        }
+    btn1.forEach(el => {
+        el.addEventListener("click", (event) => {
+            event.preventDefault();
+            console.log("se hizo click")
+            if(user === null) {
+                window.location.href = "/index.html";
+            } else if(user == "admin") {
+                window.location.href = "/index.html?user=admin";
+            }
+        })
     })
 }
 

@@ -69,7 +69,7 @@
     <footer class="footer">
         <div class="contact">
             <div class="contact__logo">
-                <a class="contact__img" href="../index.html"><img src="../assets/img/Logo.svg" alt="logo-alurageek"></a>
+                <a class="contact__img" href = "" data-ind><img src="/assets/img/Logo.svg" alt="logo-alurageek"></a>
             </div>
             <div class="contact__menu">
                 <ul class="contact__list">
@@ -93,18 +93,20 @@
                     </li>
                 </ul>
             </div>
-            <form class="contact__form">
+            <form class="contact__form" novalidate>
 
                 <legend class="contact__title">Hable con nosotros</legend>
 
                 <div class="contact__camp">
-                    <input class="contact__input" type="text">
+                    <input class="contact__input" type="text" required data-name="nombre" pattern="^(?=.{2,40}$)([A-ZÁÉÍÓÚ]?[a-zñáéíóú]+\s*)+$" placeholder="Ej: Carlos, Carlos Eduardo">
                     <label class="contact__label">Nombre</label>
+                    <span class="contact__error"></span>
                 </div>
 
                 <div class="contact__camp">
-                    <textarea class="contact__input contact__message" cols="30" rows="10"></textarea>
-                    <label class="contact__label">Escribe tu mensaje</label>
+                    <textarea class="contact__input contact__message" cols="30" rows="10" required data-name="mensaje"></textarea>
+                    <label class="contact__label contact__msg">Escribe tu mensaje</label>
+                    <span class="contact__error"></span>
                 </div>
 
                 <div class="contact__btn">
