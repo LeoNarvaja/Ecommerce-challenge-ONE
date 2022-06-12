@@ -39,40 +39,55 @@ const createDetailProduct = (nombre, precio, id, descripcion) => {
         cardDescr.innerHTML = cont
         
         const btnDel = cardDescr.querySelector("[data-del]");
-        btnDel.addEventListener("click", async () => {
-            const id = btnDel.id
-            try {
-                const res = await productServices.eliminarProducto(id);
-                if(res.ok){
-                    let timerInterval
-                    Swal.fire({
-                        title: 'Producto Eliminado!!',
-                        icon: 'success',
-                        timer: 2000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading()
-                            },
-                            illClose: () => {
-                            clearInterval(timerInterval)
+        btnDel.addEventListener("click", () => {
+        const id = btnDel.id
+        Swal.fire({
+            title: 'Estas seguro que desea eliminar este producto?',
+            text: "Esta accion no se puede revertir!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar producto!',
+            cancelButtonText: 'Cancelar'
+            }).then( async (result) => {
+                if(result.isConfirmed) {
+                    try {
+                        document.querySelector(".nav__load").classList.add("show");
+                        const res = await productServices.eliminarProducto(id);
+                        if(res.ok) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Producto eliminado con éxito',
+                                text: 'Presiona ok para continuar',
+                                confirmButtonColor: '#2A7AE4',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                allowEnterKey: false,
+                            }).then(res => {
+                                if(res.isConfirmed){
+                                    window.location.href = `/screens/productos.html?user=admin`
+                                }
+                            })
+                        } else {
+                            document.querySelector(".nav__load").classList.remove("show");
+                            throw new Error();
                         }
-                        }).then((result) => {
-                        /* Read more about handling dismissals below */
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            location.reload();
-                        }
-                    })
-                } else {
-                    throw new Error();
-                }
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'An error has occurred!!',
-                    footer: 'Please, try again later'
-                });
-            }
+                    } catch (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Ocurrio un error',
+                            text: 'Presiona ok para continuar',
+                            footer: '<p>Intentelo de nuevo más tarde</p>',
+                            confirmButtonColor: '#2A7AE4',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            allowEnterKey: false,
+                        })
+                    }
+                    document.querySelector(".nav__load").classList.remove("show");
+                } 
+            })
         })
     }
     return cardDescr
@@ -84,7 +99,7 @@ const showProducts = async () => {
     const id = url.searchParams.get("id");
 
     try {
-
+        document.querySelector(".nav__load").classList.add("show");
         const res = await productServices.detalleProducto(id);
         const resJson = await res.json();
 
@@ -109,6 +124,7 @@ const showProducts = async () => {
             }
         });
         } else {
+            document.querySelector(".nav__load").classList.remove("show");
             throw new Error();
         }
     } catch (error) {
@@ -120,7 +136,7 @@ const showProducts = async () => {
             footer: 'Please, try again later'
           })
     }
-    
+    document.querySelector(".nav__load").classList.remove("show");
 }
 
 showProducts();

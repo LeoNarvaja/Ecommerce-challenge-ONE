@@ -22,15 +22,20 @@ const searchProduct = async () => {
                 });
             }
         } else {
+            document.querySelector(".nav__load").classList.remove("show")
             throw new Error();
         }
         
     } catch (error) {
         Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'An error has occurred!!',
-            footer: 'Please, try again later'
+            title: 'Ocurrio un error',
+            text: 'Presiona ok para continuar',
+            footer: '<p>Intentelo de nuevo más tarde</p>',
+            confirmButtonColor: '#2A7AE4',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
           })
     }
     document.querySelector(".nav__load").classList.remove("show")

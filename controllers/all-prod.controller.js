@@ -2,7 +2,7 @@ import { productServices } from "../services/product-services.js";
 import { showCard } from "./show.controller.js";
 
 const box = document.querySelector("[data-prod]");
-const btnAdd = document.querySelector("[data-add]")
+const btnAdd = document.querySelector("[data-add]");
 
 const url = new URL(window.location);
 const user = url.searchParams.get("user");
@@ -32,9 +32,13 @@ const showAllProducts = async () => {
     } catch (error) {
         Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'An error has occurred!!',
-            footer: 'Please, try again later'
+            title: 'Ocurrio un error',
+            text: 'Presiona ok para continuar',
+            footer: '<p>Intentelo de nuevo más tarde</p>',
+            confirmButtonColor: '#2A7AE4',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
           })
     }
     document.querySelector(".nav__load").classList.remove("show")

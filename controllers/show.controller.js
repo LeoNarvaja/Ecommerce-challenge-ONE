@@ -29,40 +29,59 @@ const createCard = (imagen, nombre, precio, id) => {
             </div>`    
         card.innerHTML = content
         const btnDel = card.querySelector("[data-del]");
-        btnDel.addEventListener("click", async () => {
+        btnDel.addEventListener("click", () => {
             const id = btnDel.id
             try {
-                const res = await productServices.eliminarProducto(id);
-                if(res.ok){
-                    let timerInterval
-                    Swal.fire({
-                        title: 'Producto Eliminado!!',
-                        icon: 'success',
-                        timer: 2000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading()
-                            },
-                            illClose: () => {
-                            clearInterval(timerInterval)
+                document.querySelector(".nav__load").classList.add("show");
+                Swal.fire({
+                    title: 'Estas seguro que desea eliminar este producto?',
+                    text: "Esta accion no se puede revertir!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar producto!',
+                    cancelButtonText: 'Cancelar'
+                  }).then( async (result) => {
+                    if (result.isConfirmed) {
+                        const res = await productServices.eliminarProducto(id);
+                        if(res.ok) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Producto eliminado con éxito',
+                                text: 'Presiona ok para continuar',
+                                confirmButtonColor: '#2A7AE4',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                allowEnterKey: false,
+                              }).then(result => {
+                                if(result.isConfirmed){
+                                  location.reload();
+                                }
+                              })
+                        } else {
+                            document.querySelector(".nav__load").classList.remove("show");
+                            throw new Error();
                         }
-                        }).then((result) => {
-                        /* Read more about handling dismissals below */
-                         if (result.dismiss === Swal.DismissReason.timer) {
-                            location.reload();
-                        }
-                    })
-                } else {
-                    throw new Error();
-                }
+                    }
+                })
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'An error has occurred!!',
-                    footer: 'Please, try again later'
-                });
+                    title: 'Ocurrio un error',
+                    text: 'Presiona ok para continuar',
+                    footer: '<p>Intentelo de nuevo más tarde</p>',
+                    confirmButtonColor: '#2A7AE4',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                  }).then(result => {
+                    if(result.isConfirmed){
+                      location.reload();
+                    }
+                })
             }
+        document.querySelector(".nav__load").classList.remove("show");
         })
     }
     

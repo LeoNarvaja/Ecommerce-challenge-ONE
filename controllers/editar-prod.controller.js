@@ -12,7 +12,7 @@ const detailProducts = async () => {
 
 
     try {
-
+        document.querySelector(".nav__load").classList.remove("show");
         const res = await productServices.detalleProducto(id);
         const resJson = await res.json();
 
@@ -21,17 +21,27 @@ const detailProducts = async () => {
             price.value = resJson.precio;
             descr.value = resJson.descripcion;
         } else {
+            document.querySelector(".nav__load").classList.remove("show");
             throw new Error();
         }
 
     } catch (error) {
         Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'An error has occurred!!',
-            footer: 'Please, try again later'
+            title: 'Ocurrio un error',
+            text: 'Presiona ok para continuar',
+            footer: '<p>Intentelo de nuevo más tarde</p>',
+            confirmButtonColor: '#2A7AE4',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+          }).then(result => {
+            if(result.isConfirmed){
+              window.location.href = `/screens/productos.html?user=admin`;
+            }
           })
     } 
+    document.querySelector(".nav__load").classList.remove("show");
 }
 
 detailProducts();
@@ -55,25 +65,44 @@ form.addEventListener("submit", async (event) => {
     });
 
     try {
+        document.querySelector(".nav__load").classList.add("show");
         const res = await productServices.actualizarProducto(name, price, id, descr, categoria)
 
         if(res.ok) {
-            Swal.fire(
-                'Good job!',
-                'Register',
-                'success'
-            )
+            Swal.fire({
+                icon: 'success',
+                title: 'Producto modificado',
+                text: 'Presiona ok para continuar',
+                confirmButtonColor: '#2A7AE4',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+              }).then(result => {
+                if(result.isConfirmed){
+                  window.location.href = `/screens/productos.html?user=admin`;
+                }
+              })
 
         } else {
+            document.querySelector(".nav__load").classList.remove("show");
             throw new Error();
         }
 
     } catch (error) {
         Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'An error has occurred!!',
-            footer: 'Please, try again later'
-        })
+            title: 'Ocurrio un error',
+            text: 'Presiona ok para continuar',
+            footer: '<p>Intentelo de nuevo más tarde</p>',
+            confirmButtonColor: '#2A7AE4',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+          }).then(result => {
+            if(result.isConfirmed){
+              location.reload();
+            }
+          })
     }
+    document.querySelector(".nav__load").classList.remove("show");
 })
