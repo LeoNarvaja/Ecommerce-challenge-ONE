@@ -28,7 +28,7 @@ const actualizarProducto = (nombre, precio, id, descripcion, categoria) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({nombre, precio, descripcion, categoria})
+        body: JSON.stringify({imagen: 'Skill_1.png', nombre, precio, descripcion, categoria})
     })
 }
 

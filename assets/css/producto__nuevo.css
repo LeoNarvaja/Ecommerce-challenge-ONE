@@ -86,6 +86,12 @@
     height: 8rem;
 }
 
+.newproduct__sel {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
 .newproduct__btn {
     width: 100%;
 }

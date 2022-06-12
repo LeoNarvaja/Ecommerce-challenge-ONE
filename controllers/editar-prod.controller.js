@@ -10,6 +10,7 @@ const detailProducts = async () => {
     const price = document.querySelector("[data-precio]");
     const descr = document.querySelector("[data-descr]");
 
+
     try {
 
         const res = await productServices.detalleProducto(id);
@@ -41,11 +42,20 @@ form.addEventListener("submit", async (event) => {
     const url = new URL(window.location);
     const id = url.searchParams.get("id");
 
+    let categoria = "";
+
     const name = document.querySelector("[data-nombre]").value;
     const price = document.querySelector("[data-precio]").value;
+    const descr = document.querySelector("[data-descr]").value;
+    const options = document.getElementsByName("option");
+    options.forEach(opc => {
+        if(opc.checked) {
+            categoria = opc.value;
+        }
+    });
 
     try {
-        const res = await productServices.actualizarProducto(name, price, id)
+        const res = await productServices.actualizarProducto(name, price, id, descr, categoria)
 
         if(res.ok) {
             Swal.fire(
