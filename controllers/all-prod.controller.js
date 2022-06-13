@@ -1,12 +1,12 @@
 import { productServices } from "../services/product-services.js";
 import { showCard } from "./show.controller.js";
 
-const box = document.querySelector("[data-prod]");
-const btnAdd = document.querySelector("[data-add]");
+const box = document.querySelector("[data-prod]"),
+      btnAdd = document.querySelector("[data-add]"),
+      url = new URL(window.location),
+      user = url.searchParams.get("user");
 
-const url = new URL(window.location);
-const user = url.searchParams.get("user");
-
+// Validar si el usuario es un administrador.
 if(user == "admin") {
     btnAdd.classList.remove("products__add");
     btnAdd.addEventListener("click", (event) => {

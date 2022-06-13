@@ -1,15 +1,16 @@
 import { productServices } from "../services/product-services.js";
 
-const form = document.querySelector("[data-form]");
+const sendBtn = document.querySelector("[data-form]"),
+      searchBtn = document.querySelector("[data-search]"),
+      delBtn = document.querySelector("[data-delete]"),
+      actImg = document.querySelector("[data-img]"),
+      newImg = document.querySelector("[data-new]"),
+      box = document.querySelector("[data-cont]"),
+      text = document.querySelector("[data-text]");
 
-const searchBtn = document.querySelector("[data-search]");
-const delBtn = document.querySelector(".newproduct__btn___del");
-const actImg = document.querySelector("[data-img]");
-const newImg = document.querySelector("[data-new]");
-const box = document.querySelector("[data-hola]");
-const text = document.querySelector(".newproduct__newtext");
 let imgExist = false;
 
+// Seleccionar imagen desde el boton.
 searchBtn.addEventListener("change", (event) => {
     const file = event.target.files[0];
     const fileReader = new FileReader();
@@ -23,6 +24,7 @@ searchBtn.addEventListener("change", (event) => {
     })
 })
 
+// Determinar zona de arrastre para agregar imagen.
 box.addEventListener("dragover", (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -33,6 +35,7 @@ box.addEventListener("dragover", (event) => {
     text.classList.add("show");
 })
 
+// Determinar cuando se abandona la zona de arrastre para agregar imagen.
 box.addEventListener("dragleave", (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -44,6 +47,7 @@ box.addEventListener("dragleave", (event) => {
     text.classList.remove("show");
 })
 
+// Soltar archivo para agregar imagen.
 box.addEventListener("drop", (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -60,6 +64,7 @@ box.addEventListener("drop", (event) => {
     })
 })
 
+// Eliminar imagen elegida de la zona de arrastre.
 delBtn.addEventListener("click", (event) => {
     event.preventDefault();
     newImg.classList.remove("show");
@@ -69,17 +74,21 @@ delBtn.addEventListener("click", (event) => {
     imgExist = false;
 })
 
-form.addEventListener("click", async (event) => {
+sendBtn.addEventListener("click", async (event) => {
     event.preventDefault();
-    let imagen = ""
+
+    let imagen = "",
+        categoria = "";
+
     if(newImg.classList.contains("show")) {
         imagen = newImg.getAttribute("src");
     }
-    let categoria = "";
-    const nombre = document.querySelector("[data-nombre]").value;
-    const precio = document.querySelector("[data-precio]").value;
-    const descripcion = document.querySelector("[data-descr]").value;
-    const options = document.getElementsByName("option");
+
+    const nombre = document.querySelector("[data-nombre]").value,
+          precio = document.querySelector("[data-precio]").value,
+          descripcion = document.querySelector("[data-descr]").value,
+          options = document.getElementsByName("option");
+          
     options.forEach(opc => {
         if(opc.checked) {
             categoria = opc.value;

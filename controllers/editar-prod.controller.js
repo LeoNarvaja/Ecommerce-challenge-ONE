@@ -1,15 +1,14 @@
 import { productServices } from "../services/product-services.js";
 
-const form = document.querySelector("[data-form]");
-const newImg = document.querySelector("[data-new]");
+const form = document.querySelector("[data-form]"),
+      newImg = document.querySelector("[data-new]");
 
 const detailProducts = async () => {
-    const url = new URL(window.location);
-    const id = url.searchParams.get("id");
-
-    const name = document.querySelector("[data-nombre]");
-    const price = document.querySelector("[data-precio]");
-    const descr = document.querySelector("[data-descr]");
+    const url = new URL(window.location),
+          id = url.searchParams.get("id"),
+          name = document.querySelector("[data-nombre]"),
+          price = document.querySelector("[data-precio]"),
+          descr = document.querySelector("[data-descr]");
 
     try {
         document.querySelector(".nav__load").classList.add("show");
@@ -20,17 +19,18 @@ const detailProducts = async () => {
             name.value = resJson.nombre;
             price.value = resJson.precio;
             descr.value = resJson.descripcion;
-            const searchBtn = document.querySelector("[data-search]");
-            const delBtn = document.querySelector(".newproduct__btn___del");
-            const actImg = document.querySelector("[data-img]");
-            const box = document.querySelector("[data-hola]");
-            const text = document.querySelector(".newproduct__newtext");
+            const searchBtn = document.querySelector("[data-search]"),
+                  delBtn = document.querySelector("[data-delete]"),
+                  actImg = document.querySelector("[data-img]"),
+                  box = document.querySelector("[data-cont]"),
+                  text = document.querySelector("[data-text]");
             actImg.classList.add("hidden");
             newImg.classList.add("show");
             newImg.setAttribute("src", resJson.imagen);
             delBtn.classList.add("show")
             let imgExist = true;
 
+            // Seleccionar imagen desde el boton.
             searchBtn.addEventListener("change", (event) => {
                 const file = event.target.files[0];
                 const fileReader = new FileReader();
@@ -44,6 +44,7 @@ const detailProducts = async () => {
                 })
             })
 
+            // Determinar zona de arrastre para editar imagen.
             box.addEventListener("dragover", (event) => {
                 event.preventDefault();
                 event.stopPropagation();
@@ -54,6 +55,7 @@ const detailProducts = async () => {
                 text.classList.add("show");
             })
 
+            // Determinar cuando se abandona la zona de arrastre para editar imagen.
             box.addEventListener("dragleave", (event) => {
                 event.preventDefault();
                 event.stopPropagation();
@@ -65,6 +67,7 @@ const detailProducts = async () => {
                 text.classList.remove("show");
             })
 
+            // Soltar archivo para editar imagen.
             box.addEventListener("drop", (event) => {
                 event.preventDefault();
                 event.stopPropagation();
@@ -80,6 +83,7 @@ const detailProducts = async () => {
                 })
             })
 
+            // Eliminar imagen elegida de la zona de arrastre.
             delBtn.addEventListener("click", (event) => {
                 event.preventDefault();
                 newImg.classList.remove("show");
@@ -94,6 +98,7 @@ const detailProducts = async () => {
         }
 
     } catch (error) {
+        console.log(error)
         Swal.fire({
             icon: 'error',
             title: 'Ocurrio un error',
@@ -120,17 +125,18 @@ form.addEventListener("submit", async (event) => {
     const url = new URL(window.location);
     const id = url.searchParams.get("id");
 
-    let categoria = "";
-    let imagen = "";
+    let categoria = "",
+        imagen = "";
 
     if(newImg.classList.contains("show")) {
         imagen = newImg.getAttribute("src");
     }
 
-    const name = document.querySelector("[data-nombre]").value;
-    const price = document.querySelector("[data-precio]").value;
-    const descr = document.querySelector("[data-descr]").value;
-    const options = document.getElementsByName("option");
+    const name = document.querySelector("[data-nombre]").value,
+          price = document.querySelector("[data-precio]").value,
+          descr = document.querySelector("[data-descr]").value,
+          options = document.getElementsByName("option");
+
     options.forEach(opc => {
         if(opc.checked) {
             categoria = opc.value;

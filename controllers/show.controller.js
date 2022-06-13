@@ -11,9 +11,9 @@ const createCard = (imagen, nombre, precio, id) => {
             <img class="products__image" src="${imagen}" alt="Producto Imagen">
             <h3 class="products__name">${nombre}</h3>
             <p class="products__price">${precio}</p>
-            <a href="../screens/producto.html?id=${id}" class="products__option">Ver producto</a>`
+            <a href="../screens/producto.html?id=${id}" class="products__option">Ver producto</a>`;
         
-        card.innerHTML = content
+        card.innerHTML = content;
             
     } else if (admin == "admin") {
         let content = `
@@ -26,11 +26,11 @@ const createCard = (imagen, nombre, precio, id) => {
                     <a href="../screens/producto_editar.html?id=${id}&user=admin" class="products__option" data-edit><i class="fa-solid fa-pen-to-square"></i></a>
                     <a id="${id}" class="products__option" data-del><i class="fa-solid fa-trash-can"></i></a>
                 </div>
-            </div>`    
-        card.innerHTML = content
+            </div>`;
+        card.innerHTML = content;
         const btnDel = card.querySelector("[data-del]");
         btnDel.addEventListener("click", () => {
-            const id = btnDel.id
+            const id = btnDel.id;
             try {
                 document.querySelector(".nav__load").classList.add("show");
                 Swal.fire({
