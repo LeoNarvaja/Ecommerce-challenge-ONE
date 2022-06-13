@@ -10,8 +10,8 @@ const showStart = async () => {
     try {
         document.querySelector(".nav__load").classList.add("show");
         const res = await productServices.listaProductos();
-        const resJson = await res.json();
-
+        const resJson = await res.json();    
+        
         if(res.ok) {
                 resJson.forEach(({imagen, nombre, precio, id, categoria}) => {
                     const card = showCard.createCard(imagen, nombre, precio, id, categoria);

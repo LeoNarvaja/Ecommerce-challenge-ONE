@@ -52,21 +52,29 @@
 
     <section class="newproduct-section">
         <div class="newproduct">
-            <form action="" class="newproduct__form" data-form>
+            <form action="" class="newproduct__form">
 
                 <legend class="newproduct__title">Agregar nuevo producto</legend>
 
                 <div class="newproduct__field new__product-file">
                     
-                    <div class="newproduct__img-container">
-                        <img class="newproduct__img" src="../assets/img/Vector.svg" alt="">
-                        <p class="newproduct__text">Arrastre para agregar una imagen para el producto</p>
+                    <div class="newproduct__img-container" data-hola>
+                        <div class="newproduct__content" data-img>
+                            <img class="newproduct__img" src="../assets/img/Vector.svg" alt="">
+                            <p class="newproduct__text">Arrastre para agregar una imagen para el producto</p>
+                        </div>
+                        <img class="newproduct__img___bg" data-new>
+                        <span class="newproduct__newtext">Suelta la imagen aquí...</span>
                     </div>
 
                     <p class="newproduct__option">o</p>
 
                     <div class="newproduct__btn-container">
-                        <button class="btn newproduct__btn"> Busque en su computador</button>
+                        <label class="btn newproduct__btn">
+                            Busque en su computador
+                            <input type="file" class="newproduct__btn___input" data-search>
+                        </label>
+                        <button class="btn newproduct__btn newproduct__btn___del">Quitar imagen</button>
                     </div>
 
                 </div>
@@ -111,7 +119,7 @@
 
                 <div class="newproduct__field">
 
-                    <button type="submit" class="btn newproduct__btn-agree">Agregar producto</button>
+                    <button type="submit" class="btn newproduct__btn-agree" data-form>Agregar producto</button>
 
                 </div>
             </form>

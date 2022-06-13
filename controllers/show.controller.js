@@ -8,7 +8,7 @@ const createCard = (imagen, nombre, precio, id) => {
     card.classList.add("products__card");
     if(admin === null) {
         let content = `
-            <img class="products__image" src="../assets/img/${imagen}" alt="${imagen}">
+            <img class="products__image" src="${imagen}" alt="Producto Imagen">
             <h3 class="products__name">${nombre}</h3>
             <p class="products__price">${precio}</p>
             <a href="../screens/producto.html?id=${id}" class="products__option">Ver producto</a>`
@@ -17,7 +17,7 @@ const createCard = (imagen, nombre, precio, id) => {
             
     } else if (admin == "admin") {
         let content = `
-            <img class="products__image" src="../assets/img/${imagen}" alt="${imagen}">
+            <img class="products__image" src="${imagen}" alt="Producto Imagen">
             <h3 class="products__name">${nombre}</h3>
             <p class="products__price">${precio}</p>
             <div class="products__option___box">

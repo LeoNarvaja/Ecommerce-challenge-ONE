@@ -1,6 +1,7 @@
 import { productServices } from "../services/product-services.js";
 
 const form = document.querySelector("[data-form]");
+const newImg = document.querySelector("[data-new]");
 
 const detailProducts = async () => {
     const url = new URL(window.location);
@@ -10,9 +11,8 @@ const detailProducts = async () => {
     const price = document.querySelector("[data-precio]");
     const descr = document.querySelector("[data-descr]");
 
-
     try {
-        document.querySelector(".nav__load").classList.remove("show");
+        document.querySelector(".nav__load").classList.add("show");
         const res = await productServices.detalleProducto(id);
         const resJson = await res.json();
 
@@ -20,6 +20,74 @@ const detailProducts = async () => {
             name.value = resJson.nombre;
             price.value = resJson.precio;
             descr.value = resJson.descripcion;
+            const searchBtn = document.querySelector("[data-search]");
+            const delBtn = document.querySelector(".newproduct__btn___del");
+            const actImg = document.querySelector("[data-img]");
+            const box = document.querySelector("[data-hola]");
+            const text = document.querySelector(".newproduct__newtext");
+            actImg.classList.add("hidden");
+            newImg.classList.add("show");
+            newImg.setAttribute("src", resJson.imagen);
+            delBtn.classList.add("show")
+            let imgExist = true;
+
+            searchBtn.addEventListener("change", (event) => {
+                const file = event.target.files[0];
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.addEventListener("load", (event) => {
+                    actImg.classList.add("hidden");
+                    newImg.classList.add("show");
+                    newImg.setAttribute("src", event.target.result);
+                    imgExist = true;
+                    delBtn.classList.add("show");
+                })
+            })
+
+            box.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                if(imgExist){
+                    newImg.classList.remove("show");
+                }
+                actImg.classList.add("hidden");
+                text.classList.add("show");
+            })
+
+            box.addEventListener("dragleave", (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                if(imgExist){
+                    newImg.classList.add("show");
+                } else {
+                    actImg.classList.remove("hidden"); 
+                }
+                text.classList.remove("show");
+            })
+
+            box.addEventListener("drop", (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                const file = event.dataTransfer.files[0];
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.addEventListener("load", (event) => {
+                    text.classList.remove("show");
+                    newImg.classList.add("show");
+                    newImg.setAttribute("src", event.target.result);
+                    delBtn.classList.add("show");
+                    imgExist = true;
+                })
+            })
+
+            delBtn.addEventListener("click", (event) => {
+                event.preventDefault();
+                newImg.classList.remove("show");
+                text.classList.remove("show");
+                actImg.classList.remove("hidden");
+                delBtn.classList.remove("show");
+                imgExist = false;
+            })
         } else {
             document.querySelector(".nav__load").classList.remove("show");
             throw new Error();
@@ -53,6 +121,11 @@ form.addEventListener("submit", async (event) => {
     const id = url.searchParams.get("id");
 
     let categoria = "";
+    let imagen = "";
+
+    if(newImg.classList.contains("show")) {
+        imagen = newImg.getAttribute("src");
+    }
 
     const name = document.querySelector("[data-nombre]").value;
     const price = document.querySelector("[data-precio]").value;
@@ -66,7 +139,7 @@ form.addEventListener("submit", async (event) => {
 
     try {
         document.querySelector(".nav__load").classList.add("show");
-        const res = await productServices.actualizarProducto(name, price, id, descr, categoria)
+        const res = await productServices.actualizarProducto(imagen, name, price, id, descr, categoria)
 
         if(res.ok) {
             Swal.fire({

@@ -11,7 +11,7 @@ const createImgProduct = (imagen) => {
     const cardImg = document.createElement("div");
     cardImg.classList.add("content__img");
     const imgCont = `<div class="content__img">
-                        <img class="selproduct__img" src="../assets/img/${imagen}" alt="Skill_1">
+                        <img class="selproduct__img" src="${imagen}" alt="Imagen Producto">
                     </div>`
     cardImg.innerHTML = imgCont;
     return cardImg

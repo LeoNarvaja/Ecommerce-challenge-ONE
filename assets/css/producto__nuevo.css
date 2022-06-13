@@ -45,15 +45,22 @@
 }
 
 .newproduct__img-container {
+    flex-basis: 60%;
+    background-color: #FFFFFF;
+    border-style: dashed;
+    border-color: #C8C8C8;
+}
+
+.newproduct__content {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 3.2rem;
-    flex-basis: 60%;
+    pointer-events: none;
+}
 
-    background-color: #FFFFFF;
-    border-style: dashed;
-    border-color: #C8C8C8;
+.newproduct__content.hidden {
+    display: none;
 }
 
 .newproduct__img {
@@ -62,13 +69,51 @@
 
 .newproduct__btn-container {
     flex-basis: 40%;
-}   
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.newproduct__btn___input {
+    display: none;
+}
+
+.newproduct__btn___del {
+    display: none;
+}
+
+.newproduct__btn___del.show {
+    display: block;
+}
 
 .newproduct__text {
     font-size: 1.4rem;
     color: #6B6B6B;  
     line-height: 1.5;
     text-align: center;
+}
+
+.newproduct__newtext {
+    display: none;
+}
+
+.newproduct__newtext.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 7rem;
+    pointer-events: none;
+}
+
+.newproduct__img___bg {
+    display: none;
+}
+
+.newproduct__img___bg.show {
+    display: block;
+    width: 100%;
+    pointer-events: none;
 }
 
 .newproduct__field {
@@ -94,6 +139,7 @@
 
 .newproduct__btn {
     width: 100%;
+    cursor: pointer
 }
 
 .newproduct__btn-agree {
