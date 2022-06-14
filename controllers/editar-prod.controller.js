@@ -104,7 +104,6 @@ const detailProducts = async () => {
         }
 
     } catch (error) {
-        console.log(error)
         Swal.fire({
             icon: 'error',
             title: 'Ocurrio un error',
@@ -202,7 +201,6 @@ form.addEventListener("submit", async (event) => {
                     input.parentElement.querySelector(".contact__error").innerHTML = "";
                 }
             } else if (inputs[input.dataset.name] == false) {
-                console.log("falta", input)
                 input.parentElement.classList.add("error");
                 input.parentElement.querySelector(".contact__error").innerHTML = mostrarMensaje(input.dataset.name, input)
             } 

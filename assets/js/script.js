@@ -38,7 +38,6 @@ contactInputs.forEach(input => {
 
 const validarCampo = (input) => {
     const actInput = input.dataset.name;
-    console.log(actInput);
 
     if(validaciones[actInput]) {
         validaciones[actInput](input);
@@ -143,18 +142,6 @@ loginInputs.forEach(input => {
 const prodNuevo = document.querySelectorAll(".newproduct__input");
 const btnAgregar = document.querySelector("[data-form]");
 
-console.log(btnAgregar);
-
-prodNuevo.forEach(input => {
-    if(input.dataset.name == "imagen") {
-        console.log(input.querySelector("[data-new]").classList.contains("show"));
-    } else {
-        input.addEventListener("blur", (input) => {
-            validarCampo(input.target);
-        })
-    }
-})
-
 
 /*---------- VALIDAR REGISTRO ----------*/
 
@@ -169,7 +156,6 @@ if(btn1){
     btn1.forEach(el => {
         el.addEventListener("click", (event) => {
             event.preventDefault();
-            console.log("se hizo click")
             if(user === null) {
                 window.location.href = "/index.html";
             } else if(user == "admin") {
@@ -183,7 +169,6 @@ if(btn2) {
     btn2.forEach(el => {
         el.addEventListener("click", (event) => {
             event.preventDefault();
-            console.log("se hizo click")
             if(user === null) {
                 window.location.href = "/screens/productos.html";
             } else if(user == "admin") {
