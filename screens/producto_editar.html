@@ -52,13 +52,13 @@
 
     <section class="newproduct-section">
         <div class="newproduct">
-            <form action="" class="newproduct__form" data-form>
+            <form action="" class="newproduct__form" data-form novalidate>
 
                 <legend class="newproduct__title">Editar producto existente</legend>
 
                 <div class="newproduct__field new__product-file">
                     
-                    <div class="newproduct__img-container" data-cont>
+                    <div class="newproduct__img-container newproduct__input" data-cont data-name="imagen">
                         <div class="newproduct__content" data-img>
                             <img class="newproduct__img" src="../assets/img/Vector.svg" alt="">
                             <p class="newproduct__text">Arrastre para agregar una imagen para el producto</p>
@@ -77,22 +77,27 @@
                         <button class="btn newproduct__btn newproduct__btn___del" data-delete>Quitar imagen</button>
                     </div>
 
+                    <span class="contact__error"></span>
+
                 </div>
 
                 <div class="newproduct__field">
 
-                    <input type="text" class="newproduct__input" placeholder="Nombre del producto" data-nombre>
+                    <input type="text" class="newproduct__input" placeholder="Nombre del producto: Taza de star wars; Producto ABC" data-nombre data-name="nombre" pattern="^(?=.{2,40}$)([A-ZÁÉÍÓÚ]?[a-zñáéíóú]+\s*)+$" required>
+                    <span class="contact__error"></span>
 
                 </div>
                 <div class="newproduct__field">
 
-                    <input type="text" class="newproduct__input" placeholder="Precio del producto" data-precio>
+                    <input type="text" class="newproduct__input" placeholder="Precio del producto. Ej: 250.00; 250,25" data-precio data-name="precio" pattern="^\d+(.\d{1,2})?$" required>
+                    <span class="contact__error"></span>
 
                 </div>
                 
                 <div class="newproduct__field">
 
-                    <textarea class="newproduct__input new__product-msg" cols="30" rows="10" placeholder="Descripción del producto" data-descr></textarea>
+                    <textarea class="newproduct__input new__product-msg" cols="30" rows="10" placeholder="Descripción del producto" data-descr data-name="descripcion" required></textarea>
+                    <span class="contact__error"></span>
 
                 </div>
 

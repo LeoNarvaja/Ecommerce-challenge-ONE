@@ -9,6 +9,9 @@ const detailProducts = async () => {
           name = document.querySelector("[data-nombre]"),
           price = document.querySelector("[data-precio]"),
           descr = document.querySelector("[data-descr]");
+          for (const input in inputs) {
+             inputs[input] = true;
+          }
 
     try {
         document.querySelector(".nav__load").classList.add("show");
@@ -41,6 +44,7 @@ const detailProducts = async () => {
                     newImg.setAttribute("src", event.target.result);
                     imgExist = true;
                     delBtn.classList.add("show");
+                    inputs.imagen = true;
                 })
             })
 
@@ -80,6 +84,7 @@ const detailProducts = async () => {
                     newImg.setAttribute("src", event.target.result);
                     delBtn.classList.add("show");
                     imgExist = true;
+                    inputs.imagen = true;
                 })
             })
 
@@ -91,6 +96,7 @@ const detailProducts = async () => {
                 actImg.classList.remove("hidden");
                 delBtn.classList.remove("show");
                 imgExist = false;
+                inputs.imagen = false;
             })
         } else {
             document.querySelector(".nav__load").classList.remove("show");
@@ -125,63 +131,81 @@ form.addEventListener("submit", async (event) => {
     const url = new URL(window.location);
     const id = url.searchParams.get("id");
 
-    let categoria = "",
+    if(inputs.imagen && inputs.nombre && inputs.precio && inputs.descripcion) {
+        let categoria = "",
         imagen = "";
 
-    if(newImg.classList.contains("show")) {
-        imagen = newImg.getAttribute("src");
-    }
-
-    const name = document.querySelector("[data-nombre]").value,
-          price = document.querySelector("[data-precio]").value,
-          descr = document.querySelector("[data-descr]").value,
-          options = document.getElementsByName("option");
-
-    options.forEach(opc => {
-        if(opc.checked) {
-            categoria = opc.value;
+        if(newImg.classList.contains("show")) {
+            imagen = newImg.getAttribute("src");
         }
-    });
 
-    try {
-        document.querySelector(".nav__load").classList.add("show");
-        const res = await productServices.actualizarProducto(imagen, name, price, id, descr, categoria)
+        const name = document.querySelector("[data-nombre]").value,
+            price = document.querySelector("[data-precio]").value,
+            descr = document.querySelector("[data-descr]").value,
+            options = document.getElementsByName("option");
 
-        if(res.ok) {
+        options.forEach(opc => {
+            if(opc.checked) {
+                categoria = opc.value;
+            }
+        });
+
+        try {
+            document.querySelector(".nav__load").classList.add("show");
+            const res = await productServices.actualizarProducto(imagen, name, price, id, descr, categoria)
+
+            if(res.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Producto modificado',
+                    text: 'Presiona ok para continuar',
+                    confirmButtonColor: '#2A7AE4',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                }).then(result => {
+                    if(result.isConfirmed){
+                    window.location.href = `/screens/productos.html?user=admin`;
+                    }
+                })
+
+            } else {
+                document.querySelector(".nav__load").classList.remove("show");
+                throw new Error();
+            }
+
+        } catch (error) {
             Swal.fire({
-                icon: 'success',
-                title: 'Producto modificado',
+                icon: 'error',
+                title: 'Ocurrio un error',
                 text: 'Presiona ok para continuar',
+                footer: '<p>Intentelo de nuevo más tarde</p>',
                 confirmButtonColor: '#2A7AE4',
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 allowEnterKey: false,
-              }).then(result => {
+            }).then(result => {
                 if(result.isConfirmed){
-                  window.location.href = `/screens/productos.html?user=admin`;
+                location.reload();
                 }
-              })
-
-        } else {
-            document.querySelector(".nav__load").classList.remove("show");
-            throw new Error();
+            })
         }
-
-    } catch (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Ocurrio un error',
-            text: 'Presiona ok para continuar',
-            footer: '<p>Intentelo de nuevo más tarde</p>',
-            confirmButtonColor: '#2A7AE4',
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
-          }).then(result => {
-            if(result.isConfirmed){
-              location.reload();
-            }
-          })
+        document.querySelector(".nav__load").classList.remove("show");
+    } else {
+        prodNuevo.forEach(input => {
+            if(input.dataset.name == "imagen") {
+                if(inputs[input.dataset.name] == false) {
+                    input.parentElement.classList.add("error");
+                    input.parentElement.querySelector(".contact__error").innerHTML = "Debe agregar una imagen para el producto";
+                } else {
+                    input.parentElement.classList.remove("error");
+                    input.parentElement.querySelector(".contact__error").innerHTML = "";
+                }
+            } else if (inputs[input.dataset.name] == false) {
+                console.log("falta", input)
+                input.parentElement.classList.add("error");
+                input.parentElement.querySelector(".contact__error").innerHTML = mostrarMensaje(input.dataset.name, input)
+            } 
+        })
     }
-    document.querySelector(".nav__load").classList.remove("show");
 })

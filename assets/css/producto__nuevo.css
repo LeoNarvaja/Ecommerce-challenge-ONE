@@ -23,8 +23,7 @@
     color: #464646;
 }
 
-.newproduct__title,
-.newproduct__field {
+.newproduct__title {
     margin-bottom: 1.6rem;
 }
 
@@ -42,6 +41,7 @@
 
 .newproduct__option {
     text-transform: uppercase;
+    color: #000000;
 }
 
 .newproduct__img-container {
@@ -49,6 +49,11 @@
     background-color: #FFFFFF;
     border-style: dashed;
     border-color: #C8C8C8;
+    margin: 1.5rem 0;
+}
+
+.newproduct__field.error .newproduct__img-container {
+    border-color: red;
 }
 
 .newproduct__content {
@@ -117,13 +122,25 @@
 }
 
 .newproduct__field {
+    position: relative;
     width: 100%;
+}
+
+.newproduct__field.error,
+.newproduct__field.error .contact__error  {
+    color: red;
+}
+
+.newproduct__field.error .newproduct__input {
+    border: thin solid red;
+    border-color: red;
 }
 
 .newproduct__input {
     width: 100%;
     padding: 1.5rem 1.2rem;
     border: none;
+    margin: 1.5rem 0;
 }
 
 .new__product-msg {
@@ -135,6 +152,7 @@
     display: flex;
     justify-content: space-between;
     padding: 1rem;
+    margin: 2rem 0;
 }
 
 .newproduct__btn {

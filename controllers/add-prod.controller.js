@@ -21,6 +21,7 @@ searchBtn.addEventListener("change", (event) => {
         newImg.setAttribute("src", event.target.result);
         imgExist = true;
         delBtn.classList.add("show");
+        inputs.imagen = true;
     })
 })
 
@@ -60,7 +61,7 @@ box.addEventListener("drop", (event) => {
         newImg.setAttribute("src", event.target.result);
         delBtn.classList.add("show");
         imgExist = true;
-        img = event.target.result;
+        inputs.imagen = true;
     })
 })
 
@@ -72,65 +73,83 @@ delBtn.addEventListener("click", (event) => {
     actImg.classList.remove("hidden");
     delBtn.classList.remove("show");
     imgExist = false;
+    inputs.imagen = false;
 })
 
 sendBtn.addEventListener("click", async (event) => {
     event.preventDefault();
-
-    let imagen = "",
+    if(inputs.imagen && inputs.nombre && inputs.precio && inputs.descripcion) {
+        let imagen = "",
         categoria = "";
 
-    if(newImg.classList.contains("show")) {
-        imagen = newImg.getAttribute("src");
-    }
-
-    const nombre = document.querySelector("[data-nombre]").value,
-          precio = document.querySelector("[data-precio]").value,
-          descripcion = document.querySelector("[data-descr]").value,
-          options = document.getElementsByName("option");
-          
-    options.forEach(opc => {
-        if(opc.checked) {
-            categoria = opc.value;
+        if(newImg.classList.contains("show")) {
+            imagen = newImg.getAttribute("src");
         }
-    });
-    
-    try {
-        document.querySelector(".nav__load").classList.add("show");
-        const res = await productServices.crearProducto(imagen, nombre, precio, descripcion, categoria);
-        if(res.ok){
+
+        const nombre = document.querySelector("[data-nombre]").value,
+            precio = document.querySelector("[data-precio]").value,
+            descripcion = document.querySelector("[data-descr]").value,
+            options = document.getElementsByName("option");
+            
+        options.forEach(opc => {
+            if(opc.checked) {
+                categoria = opc.value;
+            }
+        });
+        
+        try {
+            document.querySelector(".nav__load").classList.add("show");
+            const res = await productServices.crearProducto(imagen, nombre, precio, descripcion, categoria);
+            if(res.ok){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Producto agregado con éxito',
+                    text: 'Presiona ok para continuar',
+                    confirmButtonColor: '#2A7AE4',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                }).then(result => {
+                    if(result.isConfirmed){
+                    window.location.href = `/screens/productos.html?user=admin`;
+                    }
+                })
+            } else {
+                document.querySelector(".nav__load").classList.remove("show");
+                throw new Error();
+            }
+        } catch (error) {
             Swal.fire({
-                icon: 'success',
-                title: 'Producto agregado con éxito',
+                icon: 'error',
+                title: 'Ocurrio un error',
                 text: 'Presiona ok para continuar',
+                footer: '<p>Intentelo de nuevo más tarde</p>',
                 confirmButtonColor: '#2A7AE4',
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 allowEnterKey: false,
-              }).then(result => {
+            }).then(result => {
                 if(result.isConfirmed){
-                  window.location.href = `/screens/productos.html?user=admin`;
+                location.reload();
                 }
-              })
-        } else {
-            document.querySelector(".nav__load").classList.remove("show");
-            throw new Error();
+            })
         }
-    } catch (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Ocurrio un error',
-            text: 'Presiona ok para continuar',
-            footer: '<p>Intentelo de nuevo más tarde</p>',
-            confirmButtonColor: '#2A7AE4',
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
-          }).then(result => {
-            if(result.isConfirmed){
-              location.reload();
-            }
-          })
+        document.querySelector(".nav__load").classList.remove("show");
+    } else {
+        prodNuevo.forEach(input => {
+            if(input.dataset.name == "imagen") {
+                if(inputs[input.dataset.name] == false) {
+                    input.parentElement.classList.add("error");
+                    input.parentElement.querySelector(".contact__error").innerHTML = "Debe agregar una imagen para el producto";
+                } else {
+                    input.parentElement.classList.remove("error");
+                    input.parentElement.querySelector(".contact__error").innerHTML = "";
+                }
+            } else if (inputs[input.dataset.name] == false) {
+                console.log("falta", input)
+                input.parentElement.classList.add("error");
+                input.parentElement.querySelector(".contact__error").innerHTML = mostrarMensaje(input.dataset.name, input)
+            } 
+        })
     }
-    document.querySelector(".nav__load").classList.remove("show");
 })

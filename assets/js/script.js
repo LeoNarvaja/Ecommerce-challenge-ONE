@@ -21,7 +21,10 @@ contactInputs.forEach(input => {
 
 const inputs = {
     nombre: false,
-    mensaje: false
+    mensaje: false,
+    precio: false,
+    descripcion: false,
+    imagen: false
 }
 
 contactInputs.forEach(input => {
@@ -35,6 +38,7 @@ contactInputs.forEach(input => {
 
 const validarCampo = (input) => {
     const actInput = input.dataset.name;
+    console.log(actInput);
 
     if(validaciones[actInput]) {
         validaciones[actInput](input);
@@ -90,6 +94,13 @@ const mensajesErrores = {
     },
     pass: {
         valueMissing: "El campo contraseña no puede estar vacio"
+    },
+    precio: {
+        valueMissing: "El campo precio no puede estar vacio",
+        patternMismatch: "Respete el formato de precio solicitado, solo dos decimales"
+    },
+    descripcion: {
+        valueMissing: "El campo descripcion no puede estar vacio",
     }
 }
 
@@ -127,8 +138,25 @@ loginInputs.forEach(input => {
     })
 })
 
+/*---------- VALIDACIONES, EDITAR/AGREGAR PRODUCTO ----------*/
+
+const prodNuevo = document.querySelectorAll(".newproduct__input");
+const btnAgregar = document.querySelector("[data-form]");
+
+console.log(btnAgregar);
+
+prodNuevo.forEach(input => {
+    if(input.dataset.name == "imagen") {
+        console.log(input.querySelector("[data-new]").classList.contains("show"));
+    } else {
+        input.addEventListener("blur", (input) => {
+            validarCampo(input.target);
+        })
+    }
+})
+
+
 /*---------- VALIDAR REGISTRO ----------*/
-let page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1)
 
 const btn1 = document.querySelectorAll("[data-ind]");
 const btn2 = document.querySelectorAll("[data-all]");

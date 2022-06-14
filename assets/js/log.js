@@ -12,12 +12,30 @@ const validarLogin = (event) => {
     const password = "12345";
 
     if(input == email && pass == password) {
-        console.log("login completado");
-
-        window.location.href = `../index.html?user=admin`
+        Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            text: 'Presiona ok para continuar',
+            confirmButtonColor: '#2A7AE4',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+          }).then(result => {
+            if(result.isConfirmed){
+                window.location.href = `../index.html?user=admin`;
+            }
+          })
     } else {
-        console.log("email o contraseña incorrecto")
-    }
+        Swal.fire({
+            icon: 'error',
+            title: 'Usuario o contraseña incorrecta',
+            text: 'Presiona ok e intentelo de nuevo',
+            confirmButtonColor: '#2A7AE4',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+        })
+    }   
 }
 
 login.addEventListener("submit", validarLogin);
