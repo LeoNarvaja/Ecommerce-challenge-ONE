@@ -1,3 +1,3 @@
 # Ecommerce-challenge-ONE
 
-[Demo del sitio:](https://www.google.com)
+## Puedes ver el sitio aquí: [https://alura-geek-ecommerce.netlify.app]
