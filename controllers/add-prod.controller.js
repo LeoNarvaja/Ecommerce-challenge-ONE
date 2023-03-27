@@ -74,6 +74,7 @@ delBtn.addEventListener("click", (event) => {
     delBtn.classList.remove("show");
     imgExist = false;
     inputs.imagen = false;
+    searchBtn.value = "";
 })
 
 sendBtn.addEventListener("click", async (event) => {

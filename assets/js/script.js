@@ -145,15 +145,15 @@ const btnAgregar = document.querySelector("[data-form]");
 
 /*---------- VALIDAR REGISTRO ----------*/
 
-const btn1 = document.querySelectorAll("[data-ind]");
-const btn2 = document.querySelectorAll("[data-all]");
-const btn3 = document.querySelector("[data-log]");
+const btnHome = document.querySelectorAll("[data-ind]");
+const btnAll = document.querySelectorAll("[data-all]");
+const btnLog = document.querySelector("[data-log]");
 
 const url = new URL(window.location)
 const user = url.searchParams.get("user")
 
-if(btn1){
-    btn1.forEach(el => {
+if(btnHome){
+    btnHome.forEach(el => {
         el.addEventListener("click", (event) => {
             event.preventDefault();
             if(user === null) {
@@ -165,8 +165,8 @@ if(btn1){
     })
 }
 
-if(btn2) {
-    btn2.forEach(el => {
+if(btnAll) {
+    btnAll.forEach(el => {
         el.addEventListener("click", (event) => {
             event.preventDefault();
             if(user === null) {
@@ -179,12 +179,12 @@ if(btn2) {
 }
 
 if(user == "admin") {
-    btn3.textContent = "Salir";
-    btn3.addEventListener("click", () => {
+    btnLog.textContent = "Salir";
+    btnLog.addEventListener("click", () => {
         window.location.href = "/index.html"
     })
 } else if (user === null) {
-    btn3.addEventListener("click", () => {
+    btnLog.addEventListener("click", () => {
         window.location.href = "/screens/login.html"
     })
 }
